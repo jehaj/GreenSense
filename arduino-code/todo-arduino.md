@@ -1,5 +1,5 @@
-[ ] Opsaml data fra temperatur og fugtighedssensor
-[ ] Opsaml data fra vandniveau måler
-[ ] Opsaml data fra lys intensitetsmåler
-[ ] 
-[ ] Kør motor (fra pi)
+- [ ] Opsaml data fra temperatur og fugtighedssensor
+- [ ] Opsaml data fra vandniveau måler
+- [ ] Opsaml data fra lys intensitetsmåler
+- [ ] 
+- [ ] Kør motor (fra pi)
