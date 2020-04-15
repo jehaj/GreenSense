@@ -1,4 +1,4 @@
-[ ] Lav server
-[ ] Gør det muligt at forbinde til server
-[ ] Introducer socket.io
-[ ] Tryk på knap kører motor
+- [ ] Lav server
+- [ ] Gør det muligt at forbinde til server
+- [ ] Introducer socket.io
+- [ ] Tryk på knap kører motor
