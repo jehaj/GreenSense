@@ -1,5 +1,6 @@
 - [ ] Opsaml data fra temperatur og fugtighedssensor
 - [ ] Opsaml data fra vandniveau måler
 - [ ] Opsaml data fra lys intensitetsmåler
+- [ ] Send denne data over Serial
 - [ ] 
 - [ ] Kør motor (fra pi)
