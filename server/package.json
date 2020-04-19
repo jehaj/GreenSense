@@ -1,0 +1,14 @@
+{
+  "name": "server-greensense",
+  "version": "1.0.0",
+  "description": "Backend server for GreenSense",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nikolaj Jehøj-Krogager",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
