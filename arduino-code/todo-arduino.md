@@ -1,4 +1,5 @@
-- [ ] Opsaml data fra temperatur og fugtighedssensor
+- [x] Opsaml data fra temperatur og fugtighedssensor
+    - [ ] Tag gennemsnittet af 6 værdier på et minut
 - [ ] Opsaml data fra vandniveau måler
 - [ ] Opsaml data fra lys intensitetsmåler
 - [ ] Send denne data over Serial
