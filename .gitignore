@@ -194,12 +194,6 @@ $RECYCLE.BIN/
 *.out
 *.app
 
-### Ekstra ###
-.arduino-code/pio
-.arduino-code/vscode/.browse.c_cpp.db*
-.arduino-code/vscode/c_cpp_properties.json
-.arduino-code/vscode/launch.json
-.arduino-code/vscode/ipch
-
+# End of https://www.gitignore.io/api/c++
 
 # End of https://www.gitignore.io/api/node,linux,windows,visualstudiocode,c++
