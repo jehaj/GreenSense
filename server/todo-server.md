@@ -1,5 +1,6 @@
 - [x] Lav server
 - [x] Gør det muligt at forbinde til server
+- [x] Tilføj data til database (SQLITE, indtil videre)
 - [ ] Overvej brug af socket.io
 - [ ] //Introducer socket.io
 - [ ] Tryk på knap kører motor

@@ -1,7 +1,7 @@
 - [x] Opsaml data fra temperatur og fugtighedssensor
-    - [ ] Tag gennemsnittet af 6 værdier på et minut
+    - [x] Tag gennemsnittet af 6 værdier på et minut (ændret til 12 over 2 minutter)
 - [ ] Opsaml data fra vandniveau måler
-- [ ] Opsaml data fra lys intensitetsmåler
-- [ ] Send denne data over Serial
+- [x] Opsaml data fra lys intensitetsmåler
+- [x] Send denne data over Serial
 - [ ] 
 - [ ] Kør motor (fra pi)
