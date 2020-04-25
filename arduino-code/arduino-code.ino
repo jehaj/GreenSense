@@ -1,8 +1,14 @@
 #include <dht_nonblocking.h>
 #define DHT_SENSOR_TYPE DHT_TYPE_11
 
-float temperatures[6];
-float humidities[6];
+static const int DHT_SENSOR_PIN = 2;
+DHT_nonblocking dht_sensor( DHT_SENSOR_PIN, DHT_SENSOR_TYPE );
+
+static const int PHOTOCELL_PIN = 0;
+
+float temperatures[12];
+float humidities[12];
+float lightsensities[12];
 int counter = 0;
 
 void setup() {
@@ -28,6 +34,16 @@ static bool measure_environment(float *temperature, float *humidity)
   return (false);
 }
 
+static float returnAverage(float myArray[], int size) {
+  float sum = 0;
+  for (int i = 0; i < size; i++) {
+    sum = sum + myArray[i];
+  }
+  float average = sum/size;
+  return average;
+  
+}
+
 void loop() {
   // put your main code here, to run repeatedly:
   float temperature;
@@ -39,15 +55,19 @@ void loop() {
   {
     temperatures[counter] = temperature;
     humidities[counter] = humidity;
+    lightsensities[counter] = analogRead(PHOTOCELL_PIN);
     counter++;
-    if (counter >= 6) {
+    if (counter >= 12) {
       counter = 0;
-      float averageTemperature = (temperatures[0]+temperatures[1]+temperatures[2]+temperatures[3]+temperatures[4]+temperatures[5])/6;
-      float averageHumidity = (humidities[0]+humidities[1]+humidities[2]+humidities[3]+humidities[4]+humidities[5])/6;
+      float averageTemperature = returnAverage(temperatures, sizeof(temperatures)/sizeof(temperatures[0]));
+      float averageHumidity = returnAverage(humidities, sizeof(humidities)/sizeof(humidities[0]));
+      float averageLight = returnAverage(lightsensities, sizeof(lightsensities)/sizeof(lightsensities[0]));
       Serial.print("T=");
       Serial.print(averageTemperature, 1);
       Serial.print(";H=");
-      Serial.println(averageHumidity, 1);
+      Serial.print(averageHumidity, 1);
+      Serial.print(";LS=");
+      Serial.println(averageLight, 1);
     }
     
   }
