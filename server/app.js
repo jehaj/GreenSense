@@ -21,6 +21,7 @@ app.get('/logo.png', (req, res) => res.sendFile(path.join(__dirname, 'logo.png')
 
 app.get('/advert-1.png', (req, res) => res.sendFile(path.join(__dirname, 'advert-1.png')));
 app.get('/advert-2.png', (req, res) => res.sendFile(path.join(__dirname, 'advert-2.png')));
+app.get('/advert-3.png', (req, res) => res.sendFile(path.join(__dirname, 'advert-3.png')));
 
 const usbPath = 'COM4';
 const Readline = require('@serialport/parser-readline');
