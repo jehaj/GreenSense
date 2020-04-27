@@ -20,7 +20,7 @@ app.get('/minprofil', (req, res) => res.sendFile(path.join(__dirname, 'profil-te
 
 app.get('/logo.png', (req, res) => res.sendFile(path.join(__dirname, 'logo.png')));
 
-app.get('/advert-*.jpg', (req, res) => res.sendFile(path.join(__dirname, req.url.replace(req.baseUrl+"/", ""))));
+app.get('/advert-*.jpg', (req, res) => res.sendFile(path.join(__dirname, req.url.replace(req.baseUrl + "/", ""))));
 
 app.get('/database', (req, res) => {
     let responseJSON;
@@ -31,7 +31,7 @@ app.get('/database', (req, res) => {
             return console.error(err);
         }
         res.json(JSON.stringify(rows));
-    })    
+    })
 });
 
 const usbPath = 'COM4';
@@ -75,6 +75,6 @@ process.on('SIGINT', () => { // does not work on windows
             console.error(err.message);
         }
         console.log('Disconnected from database.');
+        process.exit();
     })
-    setTimeout(() => { process.exit(); }, 1000);
 });
