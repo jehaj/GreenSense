@@ -30,8 +30,7 @@ app.get('/database', (req, res) => {
         if (err) {
             return console.error(err);
         }
-        newRows = rows.concat(rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows);
-        res.json(JSON.stringify(newRows));
+        res.json(JSON.stringify(rows));
     })    
 });
 
