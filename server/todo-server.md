@@ -4,4 +4,4 @@
 - [ ] Overvej brug af socket.io
 - [ ] //Introducer socket.io
 - [ ] Tryk på knap kører motor
-- [ ] Gøre brug af caching (I den forstand, at serveren hvert tiende minut henter data fra serveren og når klienten spørger om data sender den, den gemte version).
+- [ ] Gøre brug af caching (I den forstand, at serveren hvert tiende minut henter data fra databasen og når klienten spørger om data sender den, den gemte version).
