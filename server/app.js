@@ -6,6 +6,7 @@ const app = express();
 const sqlite3 = require('sqlite3').verbose();
 const SerialPort = require('serialport');
 const moment = require('moment');
+
 const hostname = 'localhost';
 const port = 3000;
 
@@ -19,7 +20,20 @@ app.get('/minprofil', (req, res) => res.sendFile(path.join(__dirname, 'profil-te
 
 app.get('/logo.png', (req, res) => res.sendFile(path.join(__dirname, 'logo.png')));
 
-app.get('/advert-*.png', (req, res) => res.sendFile(path.join(__dirname, req.url.replace(req.baseUrl+"/", ""))));
+app.get('/advert-*.jpg', (req, res) => res.sendFile(path.join(__dirname, req.url.replace(req.baseUrl+"/", ""))));
+
+app.get('/database', (req, res) => {
+    let responseJSON;
+
+    let sql = 'SELECT * from GreenSense;'
+    db.all(sql, (err, rows) => {
+        if (err) {
+            return console.error(err);
+        }
+        newRows = rows.concat(rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows, rows);
+        res.json(JSON.stringify(newRows));
+    })    
+});
 
 const usbPath = 'COM4';
 const Readline = require('@serialport/parser-readline');
