@@ -1,0 +1,11 @@
+#main-header {
+    border-bottom: 5px solid green;
+}
+
+#main-header nav h1 a{ 
+    color: white;
+}
+
+#main-header nav h1 a:hover { 
+    text-decoration: none;
+}
