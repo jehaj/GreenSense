@@ -14,13 +14,15 @@ const port = 3000;
 // server.listen(port, () => console.log(`GreenSense app listening at http://${hostname}:${port}`));
 app.listen(port, () => console.log(`GreenSense app listening at http://${hostname}:${port}`));
 
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'template.html')));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 
-app.get('/minprofil', (req, res) => res.sendFile(path.join(__dirname, 'profil-template.html')));
+app.get('/grafer.html', (req, res) => res.sendFile(path.join(__dirname, 'grafer.html')));
 
-app.get('/logo.png', (req, res) => res.sendFile(path.join(__dirname, 'logo.png')));
+app.get('/img/logo.png', (req, res) => res.sendFile(path.join(__dirname, 'img' ,'logo.png')));
 
-app.get('/advert-*.jpg', (req, res) => res.sendFile(path.join(__dirname, req.url.replace(req.baseUrl + "/", ""))));
+app.get('/img/picture-*.jpg', (req, res) => res.sendFile(path.join(__dirname, req.url.replace(req.baseUrl + "/", ""))));
+
+app.get('/css/main.css', (req, res) => res.sendFile(path.join(__dirname, 'css' ,'main.css')))
 
 app.get('/database', (req, res) => {
     let responseJSON;
