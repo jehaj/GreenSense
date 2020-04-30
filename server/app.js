@@ -41,7 +41,7 @@ const usbPort = new SerialPort(usbPath, { baudRate: 9600 });
 const parser = new Readline();
 usbPort.pipe(parser);
 
-let db = new sqlite3.Database('./mydatabase.db', (err) => {
+let db = new sqlite3.Database('./arduinoData.db', (err) => {
     if (err) {
         console.error(err.message);
     }

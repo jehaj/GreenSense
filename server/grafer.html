@@ -13,10 +13,12 @@
   </head>
   <body>
     <header id="main-header">
-        <nav class="navbar navbar-dark bg-dark" style="color: white;">
-            <a href="/index.html"><img src="img/logo.png" style="width: 50px;"></a>
-            <h1><a href="/index.html">Greensense</a></h1>
-            <h6>Velkommen bruger</h6>
+        <nav class="navbar-dark bg-dark" style="color: white;">
+            <div class="row m-0 p-0">
+                <div class="col-sm-2" style="text-align: left;"><a href="/index.html"><img src="img/logo.png" style="width: 50px;"></a></div>
+                <div class="col-sm-8" style="text-align: center;"><h1><a href="/index.html">Greensense</a></h1></div>
+                <div class="col-sm-2 mt-3" style="text-align: right;"><h6>Velkommen bruger</h6></div>
+            </div>
         </nav>
     </header>
     <main>
@@ -39,14 +41,23 @@
                                 <div class="card-header">
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <canvas onclick="test(this);" style="background-color:yellow; width:100%;"></canvas>
+                                            <canvas onclick="test(this);" id="canvasJord" style="background-color:yellow; width:100%;"></canvas>
                                         </div>
                                         <div class="col-sm-4">
-                                            <canvas onclick="test(this);" style="background-color:orange; width:100%;"></canvas>
+                                            <canvas onclick="test(this);" id="canvasVand" style="background-color:orange; width:100%;"></canvas>
                                         </div>
                                         <div class="col-sm-4">
-                                            <canvas onclick="test(this);" style="background-color:black; width:100%;"></canvas>
+                                            <canvas onclick="test(this);" id="canvasLuft" style="background-color:black; width:100%;"></canvas>
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <canvas onclick="test(this);" id="canvasTemperatur" style="background-color:yellow; width:100%;"></canvas>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <canvas onclick="test(this);" id="canvasLys" style="background-color:orange; width:100%;"></canvas>
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -63,6 +74,18 @@
     </main>
 
     <!-- Optional JavaScript -->
+
+    <script>
+        fetch('http://localhost:3000/database')
+        .then((response) => {
+            return response.json();
+        
+        })
+        .then((data) => {
+            console.log(data);
+        });
+    </script>
+
     <script>
         function test(can) {
             var copy = can.cloneNode(true);
