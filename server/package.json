@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "formidable": "^1.2.2",
     "moment": "^2.24.0",
     "serialport": "^8.0.7",
     "sqlite3": "^4.2.0"

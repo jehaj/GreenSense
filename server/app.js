@@ -10,19 +10,22 @@ const moment = require('moment');
 const hostname = 'localhost';
 const port = 3000;
 
+const formidable = require('formidable');
+const fs = require('fs');
+
 // følgende linje hvis brug af socket io
 // server.listen(port, () => console.log(`GreenSense app listening at http://${hostname}:${port}`));
 app.listen(port, () => console.log(`GreenSense app listening at http://${hostname}:${port}`));
 
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+app.get('/myprofile', (req, res) => res.sendFile(path.join(__dirname, 'profile.html')));
+app.get('/contact', (req, res) => res.sendFile(path.join(__dirname, 'contact.html')));
+app.get('/buy', (req, res) => res.sendFile(path.join(__dirname, 'buy.html')));
 
-app.get('/grafer.html', (req, res) => res.sendFile(path.join(__dirname, 'grafer.html')));
-
-app.get('/img/logo.png', (req, res) => res.sendFile(path.join(__dirname, 'img' ,'logo.png')));
+app.get('/img/logo.png', (req, res) => res.sendFile(path.join(__dirname, 'img', 'logo.png')));
 
 app.get('/img/picture-*.jpg', (req, res) => res.sendFile(path.join(__dirname, req.url.replace(req.baseUrl + "/", ""))));
-
-app.get('/css/main.css', (req, res) => res.sendFile(path.join(__dirname, 'css' ,'main.css')))
+app.get('/img/userpicture.jpg', (req, res) => res.sendFile(path.join(__dirname, 'img', 'userpicture.jpg')));
 
 app.get('/database', (req, res) => {
     let responseJSON;
@@ -34,6 +37,19 @@ app.get('/database', (req, res) => {
         }
         res.json(JSON.stringify(rows));
     })
+});
+
+// Gør det muligt for brugeren at uploade et billede af sin plante
+app.post('/myprofile/uploadnewpicture', function (req, res) {
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, file) {
+        var oldpath = file['files[]']['path'];
+        var newpath = path.join(__dirname, 'img', 'userpicture.jpg');
+        fs.rename(oldpath, newpath, function (err) {
+            if (err) throw err;
+            res.send('File uploaded and moved!');
+        });
+    });
 });
 
 const usbPath = 'COM4';
@@ -70,7 +86,7 @@ parser.on('data', function (line) {
     });
 });
 
-process.on('SIGINT', () => { // does not work on windows
+process.on('SIGINT', () => {
     console.log("Closing...");
     db.close((err) => {
         if (err) {
