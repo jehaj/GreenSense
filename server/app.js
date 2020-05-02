@@ -41,6 +41,12 @@ app.get('/database', (req, res) => {
     })
 });
 
+// vand plante
+app.post('/waterplant', (req, res) => {
+    console.log('Planten vandes nu...');
+    res.send('Succes');
+});
+
 // Gør det muligt for brugeren at uploade et billede af sin plante
 app.post('/myprofile/uploadnewpicture', function (req, res) {
     var form = new formidable.IncomingForm();
@@ -49,6 +55,7 @@ app.post('/myprofile/uploadnewpicture', function (req, res) {
         var newpath = path.join(__dirname, 'img', 'userpicture.jpg');
         fs.rename(oldpath, newpath, function (err) {
             if (err) throw err;
+            console.log('Billedet er ændret.');
             res.send('File uploaded and moved!');
         });
     });

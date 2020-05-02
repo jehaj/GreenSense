@@ -14,6 +14,23 @@ var lysChart;
 var combinedChart;
 var charts;
 
+function waterplant() {
+    fetch(window.location.origin + '/waterplant', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'text/plain',
+        },
+        body: 'vand plante',
+    })
+        .then(response => response)
+        .then(data => {
+            console.log('Planten vandes nu.');
+        })
+        .catch((error) => {
+            console.error('Der gik noget galt:', error);
+        });
+}
+
 function insertDataHTML(data) {
     document.getElementById("temperatur").innerHTML = " " + data[0][data[0].length - 1]
     document.getElementById("luftFugtighed").innerHTML = " " + data[1][data[1].length - 1]
@@ -249,9 +266,14 @@ fetch(window.location.origin + '/database')
             <div>
                 <canvas onclick="clickOnCanvas(this);" id="canvasLys" style="height: 218px;"></canvas>
             </div>
-            
             <div>
                 <canvas onclick="clickOnCanvas(this);" id="canvasLuft" style="height: 218px;"></canvas>
+            </div>
+            <div>
+                <canvas onclick="clickOnCanvas(this);" id="canvasJord" style="height: 218px;"></canvas>
+            </div>
+            <div>
+                <canvas onclick="clickOnCanvas(this);" id="canvasVand" style="height: 218px;"></canvas>
             </div>`;
 
         canvasHolder.innerHTML = `

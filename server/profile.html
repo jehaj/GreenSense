@@ -56,6 +56,10 @@
                                 <td>Lysniveau</td>
                                 <td><span id="lys">XX</span>%</td>
                             </tr>
+                            <tr>
+                                <td>Vandniveau</td>
+                                <td><span id="vand">XX</span>%</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -70,7 +74,7 @@
                 </div>
             </div>
             <div class="uk-width-1-1 uk-margin">
-                <button class="uk-button uk-button-danger uk-button-large uk-width-1-1">Vand planten nu</button>
+                <button class="uk-button uk-button-danger uk-button-large uk-width-1-1" onclick="waterplant()">Vand planten nu</button>
 
             </div>
         </div>
@@ -86,25 +90,25 @@
                     </div>
                 </div>
                 <div>
-                    <div class="uk-tile uk-tile-muted">
+                    <div class="uk-tile uk-tile-default">
                         <p class="uk-h4">(Luft)fugtighed</p>
                         <div uk-spinner></div>
                     </div>
                 </div>
                 <div>
-                    <div class="uk-tile uk-tile-primary">
+                    <div class="uk-tile uk-tile-default">
                         <p class="uk-h4">Lysniveau</p>
                         <div uk-spinner></div>
                     </div>
                 </div>
                 <div>
-                    <div class="uk-tile uk-tile-secondary">
+                    <div class="uk-tile uk-tile-default">
                         <p class="uk-h4">(Jord)fugtighed</p>
                         <div uk-spinner></div>
                     </div>
                 </div>
                 <div>
-                    <div class="uk-tile uk-tile-primary">
+                    <div class="uk-tile uk-tile-default">
                         <p class="uk-h4">Vandniveau</p>
                         <div uk-spinner></div>
                     </div>
