@@ -22,6 +22,8 @@ app.get('/myprofile', (req, res) => res.sendFile(path.join(__dirname, 'profile.h
 app.get('/contact', (req, res) => res.sendFile(path.join(__dirname, 'contact.html')));
 app.get('/buy', (req, res) => res.sendFile(path.join(__dirname, 'buy.html')));
 
+app.get('/client.js', (req, res) => res.sendFile(path.join(__dirname, 'client.js')));
+
 app.get('/img/logo.png', (req, res) => res.sendFile(path.join(__dirname, 'img', 'logo.png')));
 
 app.get('/img/picture-*.jpg', (req, res) => res.sendFile(path.join(__dirname, req.url.replace(req.baseUrl + "/", ""))));
