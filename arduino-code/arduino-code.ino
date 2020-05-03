@@ -4,11 +4,14 @@
 static const int DHT_SENSOR_PIN = 2;
 DHT_nonblocking dht_sensor( DHT_SENSOR_PIN, DHT_SENSOR_TYPE );
 
-static const int PHOTOCELL_PIN = 0;
+static const int PHOTOCELL_PIN = A0;
+
+static const int MOISTURE_PIN = A1;
 
 float temperatures[12];
 float humidities[12];
 float lightsensities[12];
+float moistures[12];
 int counter = 0;
 
 void setup() {
@@ -56,18 +59,22 @@ void loop() {
     temperatures[counter] = temperature;
     humidities[counter] = humidity;
     lightsensities[counter] = analogRead(PHOTOCELL_PIN);
+    moistures[counter] = ( 100 - ( (analogRead(sensor_pin)/1023.00) * 100 ));
     counter++;
     if (counter >= 12) {
       counter = 0;
       float averageTemperature = returnAverage(temperatures, sizeof(temperatures)/sizeof(temperatures[0]));
       float averageHumidity = returnAverage(humidities, sizeof(humidities)/sizeof(humidities[0]));
       float averageLight = returnAverage(lightsensities, sizeof(lightsensities)/sizeof(lightsensities[0]));
+      float averageMoisture = returnAverage(moistures, sizeof(moistures)/sizeof(moistures[0]));
       Serial.print("T=");
       Serial.print(averageTemperature, 1);
       Serial.print(";H=");
       Serial.print(averageHumidity, 1);
       Serial.print(";LS=");
-      Serial.println(averageLight, 1);
+      Serial.print(averageLight, 1);
+      Serial.print(";M=");
+      Serial.println(averageMoisture, 1);
     }
     
   }
