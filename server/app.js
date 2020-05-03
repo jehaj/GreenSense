@@ -30,15 +30,21 @@ app.get('/img/picture-*.jpg', (req, res) => res.sendFile(path.join(__dirname, re
 app.get('/img/userpicture.jpg', (req, res) => res.sendFile(path.join(__dirname, 'img', 'userpicture.jpg')));
 
 app.get('/database', (req, res) => {
-    let responseJSON;
+    let response = [];
 
-    let sql = 'SELECT * from GreenSense;'
-    db.all(sql, (err, rows) => {
+    // henter kun fra de sidste 24 timer (84600 sekunder)
+    let sql = `SELECT * from GreenSense WHERE Timestamp >= ${(moment().unix() - 86400).toString()} ORDER BY Timestamp DESC;`;
+    console.log(sql);
+    db.each(sql, (err, row) => {
         if (err) {
             return console.error(err);
         }
-        res.json(JSON.stringify(rows));
-    })
+        // console.log(rows);
+        response.push(row);
+    }, () => {
+        res.json(JSON.stringify(response));
+    });
+
 });
 
 // vand plante
