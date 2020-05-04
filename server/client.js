@@ -34,24 +34,32 @@ function waterplant() {
 function insertDataHTML(data) {
     document.getElementById("temperatur").innerHTML = " " + data[0][data[0].length - 1]
     document.getElementById("luftFugtighed").innerHTML = " " + data[1][data[1].length - 1]
-    document.getElementById("lys").innerHTML = " " + data[2][data[2].length - 1]
+    document.getElementById("vand").innerHTML = " " + data[2][data[2].length - 1]
+    document.getElementById("lys").innerHTML = " " + data[3][data[3].length - 1]
+    document.getElementById("jordFugtighed").innerHTML = " " + data[4][data[4].length - 1]
 }
 
 function createCharts(labels, data) {
     temperaturChart = new smallChart('canvasTemperatur', 'Temperatur', 'rgb(255, 20, 20)');
     temperaturChart.fillWithData(labels, data[0]);
 
-    luftFugtighedsChart = new smallChart('canvasLuft', 'Luftfugtighed', 'rgb(20, 20, 255)');
+    luftFugtighedsChart = new smallChart('canvasLuft', 'Luftfugtighed', 'rgb(20, 220, 255)');
     luftFugtighedsChart.fillWithData(labels, data[1]);
 
+    vandChart = new smallChart('canvasVand', 'Vandniveau', 'rgb(20, 20, 220)');
+    vandChart.fillWithData(labels, data[2]);
+
     lysChart = new smallChart('canvasLys', 'Lysniveau', 'rgb(220, 220, 20)');
-    lysChart.fillWithData(labels, data[2]);
+    lysChart.fillWithData(labels, data[3]);
+
+    jordChart = new smallChart('canvasJord', 'Jordfugtighed', 'rgb(139, 69, 19)');
+    jordChart.fillWithData(labels, data[4]);
 
     combinedChart = new bigChart('myChart', [], [], []);
     combinedChart.chart.data.labels = labels;
     combinedChart.chart.update();
 
-    charts = [temperaturChart, luftFugtighedsChart, lysChart];
+    charts = [temperaturChart, luftFugtighedsChart, vandChart, lysChart, jordChart];
 }
 
 function clickOnCanvas(can) {
@@ -226,7 +234,7 @@ class bigChart {
 
 // get data from server
 let labels = [];
-let data = [[], [], []];
+let data = [[], [], [], [], []];
 
 fetch(window.location.origin + '/database')
     .then((response) => {
@@ -245,11 +253,15 @@ fetch(window.location.origin + '/database')
 
             let temperature = element['Temperature'];
             let fugtighed = element['Humidity'];
+            let vandniveau = element['Waterlevel'];
             let lys = element['Lightsensitivity'];
+            let jordfugtighed = element['Moisture'];
 
             data[0].push(temperature);
             data[1].push(fugtighed);
-            data[2].push(Math.round((lys / 1023) * 100));
+            data[2].push(vandniveau);
+            data[3].push(Math.round((lys / 1023) * 100));
+            data[4].push(jordfugtighed);
         }
         // clear loading space
         let smallCanvasHolder = document.getElementById('smallCanvasHolder');
