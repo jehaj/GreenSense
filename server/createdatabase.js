@@ -1,7 +1,7 @@
 // should try to create the database if it already exists
 const fs = require('fs');
 
-const path = './mydatabase.db';
+const path = './arduinoData.db';
 if (fs.existsSync(path)) {
     console.log('The database already exists. Exiting...')
     process.exit();
@@ -10,7 +10,7 @@ if (fs.existsSync(path)) {
 // create the database if it doesnt exist (checked above)
 const sqlite3 = require('sqlite3').verbose();
 
-let db = new sqlite3.Database('./mydatabase.db', (err) => {
+let db = new sqlite3.Database('./arduinoData.db', (err) => {
     if (err) {
         return console.error(err.message);
     }
@@ -22,7 +22,8 @@ let sql = `CREATE TABLE "GreenSense" (
             "Temperature"	REAL,
             "Humidity"	REAL,
             "Waterlevel"	REAL,
-            "Lightsensitivity"	REAL
+            "Lightsensitivity"	REAL,
+            "Moisture"  REAL
 );`
 
 db.run(sql, (err) => {
