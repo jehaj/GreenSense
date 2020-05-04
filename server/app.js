@@ -33,7 +33,7 @@ app.get('/database', (req, res) => {
     let response = [];
 
     // henter kun fra de sidste 24 timer (84600 sekunder)
-    let sql = `SELECT * from GreenSense WHERE Timestamp >= ${(moment().unix() - 2086400).toString()} ORDER BY Timestamp DESC;`;
+    let sql = `SELECT * from GreenSense WHERE Timestamp >= ${(moment().unix() - 86400).toString()} ORDER BY Timestamp DESC;`;
     
     db.each(sql, (err, row) => {
         if (err) {
@@ -45,12 +45,6 @@ app.get('/database', (req, res) => {
         res.json(JSON.stringify(response));
     });
 
-});
-
-// vand plante
-app.post('/waterplant', (req, res) => {
-    console.log('Planten vandes nu...');
-    res.send('Succes');
 });
 
 // Gør det muligt for brugeren at uploade et billede af sin plante
@@ -88,10 +82,12 @@ parser.on('data', function (line) {
     let timestamp = moment().unix();
     let temperature = dataSplit[0].split('=')[1];
     let humidity = dataSplit[1].split('=')[1];
+    let waterlevel = dataSplit[4].split('=')[1];
     let photocellValue = dataSplit[2].split('=')[1];
-    let values = [timestamp, temperature, humidity, photocellValue];
+    let moistureValue = dataSplit[3].split('=')[1];
+    let values = [timestamp, temperature, humidity, waterlevel, photocellValue, moistureValue];
     let placeholder = values.join(', ');
-    let sql = "INSERT INTO GreenSense (Timestamp, Temperature, Humidity, Lightsensitivity) VALUES (" + placeholder + ");";
+    let sql = "INSERT INTO GreenSense (Timestamp, Temperature, Humidity, Waterlevel, Lightsensitivity, Moisture) VALUES (" + placeholder + ");";
 
     db.run(sql, (err) => {
         if (err) {
@@ -99,6 +95,19 @@ parser.on('data', function (line) {
         }
         console.log('Added data to database.');
     });
+});
+
+// vand plante
+app.post('/waterplant', (req, res) => {
+    console.log('Planten vandes nu...');
+
+    usbPort.write('water\n', (err) => {
+        if (err) {
+            return console.error(err);
+        }
+    });
+
+    res.send('Succes');
 });
 
 process.on('SIGINT', () => {
