@@ -33,7 +33,7 @@ app.get('/database', (req, res) => {
     let response = [];
 
     // henter kun fra de sidste 24 timer (84600 sekunder)
-    let sql = `SELECT * from GreenSense WHERE Timestamp >= ${(moment().unix() - 86400).toString()} ORDER BY Timestamp DESC;`;
+    let sql = `SELECT * from GreenSense WHERE Timestamp >= ${(moment().unix() - 86400).toString()} ORDER BY Timestamp ASC;`;
     
     db.each(sql, (err, row) => {
         if (err) {
