@@ -4,11 +4,11 @@ GreenSense er en plantepasser, som giver dig en masse statistik du kan bruge til
 
 ## Hvordan ser det ud?
 Med din GreenSense sat op, passer den automatisk din plante. Hvis du har lyst til at se omstændighederne dine planter døjer med kan du gøre det ved at besøge hjemmesiden, der indtil videre køres på en RASPBERRY PI.
-###Forsiden
+### Forsiden
 ![Første billede af forsiden](https://github.com/NikolajK-HTX/GreenSense/blob/master/images/frontpage-1.png "Første billede af forsiden")
 ![Andet billede af forsiden](https://github.com/NikolajK-HTX/GreenSense/blob/master/images/frontpage-2.png "Andet billede af forsiden")
 
-###Personlige side
+### Personlige side
 ![Første billede af personlige side](https://github.com/NikolajK-HTX/GreenSense/blob/master/images/personal-1.png "Første billede af personlige side")
 Det er muligt at ændre billedet af din plante. Enten ved at uploade et billede eller ved at tage et nyt med din telefon.
 
