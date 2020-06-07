@@ -117,10 +117,10 @@ parser.on('data', function (line) {
     });
 
     // hvis vand niveauet er for lavt og der er gået 10 minutter, vand planten
-    if (moistureValue < 20 && (latestWaterTime + 60*10) < moment.unix()) {
+    if (parseInt(moistureValue) < 20 && (latestWaterTime + 60*10) < moment().unix()) {
         // vand plante
-        latestWaterTime = moment.unix();
-        console.log(`Vander planten automatisk nu (${moment.format('lll')})`)
+        latestWaterTime = moment().unix();
+        console.log(`Vander planten automatisk nu (${moment().format('lll')})`)
         usbPort.write('water\n', (err) => {
             if (err) {
                 return console.error(err);
