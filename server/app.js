@@ -10,12 +10,29 @@ const moment = require('moment');
 const hostname = 'localhost';
 const port = 3000;
 
+const os = require('os');
+
+let myPathIs = '';
+let myIPAddress = '';
+if (os.platform == 'win32') {
+    myPathIs = 'COM4';
+    myIPAddress = interfaces['Wi-Fi'][1]['address'];
+
+} else if (os.platform == 'linux') {
+    myPathIs = '/dev/ttyACM0';
+    myIPAddress = interfaces['wlan0'][0]['address'];
+}
+
 const formidable = require('formidable');
 const fs = require('fs');
 
 // følgende linje hvis brug af socket io
 // server.listen(port, () => console.log(`GreenSense app listening at http://${hostname}:${port}`));
-app.listen(port, () => console.log(`GreenSense app listening at http://${hostname}:${port}`));
+app.listen(port, () => {
+    console.log(`GreenSense app listening at http://${hostname}:${port}`);
+    console.log(`You can find it at: http://${myIPAddress}:${port}`);
+
+});
 
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 app.get('/myprofile', (req, res) => res.sendFile(path.join(__dirname, 'profile.html')));
@@ -61,8 +78,7 @@ app.post('/myprofile/uploadnewpicture', function (req, res) {
     });
 });
 
-const usbPath = 'COM4';
-// const usbPath = '/dev/ttyACM0';
+const usbPath = myPathIs;
 const Readline = require('@serialport/parser-readline');
 const usbPort = new SerialPort(usbPath, { baudRate: 9600 });
 
@@ -75,6 +91,8 @@ let db = new sqlite3.Database('./arduinoData.db', (err) => {
     }
     console.log('Connected to my database.');
 });
+
+let latestWaterTime = 0;
 
 parser.on('data', function (line) {
     // push new data to database
@@ -96,6 +114,17 @@ parser.on('data', function (line) {
         }
         console.log('Added data to database.');
     });
+
+    // hvis vand niveauet er for lavt og der er gået 10 minutter, vand planten
+    if (moistureValue < 20 && (latestWaterTime + 60*10) < moment.unix()) {
+        // vand plante
+        latestWaterTime = moment.unix();
+        usbPort.write('water\n', (err) => {
+            if (err) {
+                return console.error(err);
+            }
+        });
+    }
 });
 
 // vand plante
