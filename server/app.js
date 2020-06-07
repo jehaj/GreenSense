@@ -62,6 +62,7 @@ app.post('/myprofile/uploadnewpicture', function (req, res) {
 });
 
 const usbPath = 'COM4';
+// const usbPath = '/dev/ttyACM0';
 const Readline = require('@serialport/parser-readline');
 const usbPort = new SerialPort(usbPath, { baudRate: 9600 });
 
