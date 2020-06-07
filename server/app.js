@@ -14,6 +14,7 @@ const os = require('os');
 
 let myPathIs = '';
 let myIPAddress = '';
+let interfaces = os.networkInterfaces();
 if (os.platform == 'win32') {
     myPathIs = 'COM4';
     myIPAddress = interfaces['Wi-Fi'][1]['address'];
