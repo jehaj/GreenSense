@@ -97,7 +97,7 @@ let latestWaterTime = 0;
 
 parser.on('data', function (line) {
     // push new data to database
-    console.log(line);
+    console.log(`Received from Arduino: ${line}`);
     let dataSplit = line.split(';');
     let timestamp = moment().unix();
     let temperature = dataSplit[0].split('=')[1];
@@ -113,13 +113,14 @@ parser.on('data', function (line) {
         if (err) {
             return console.error(err.message);
         }
-        console.log('Added data to database.');
+        console.log('The data was succesfully added to the database.');
     });
 
     // hvis vand niveauet er for lavt og der er gået 10 minutter, vand planten
     if (moistureValue < 20 && (latestWaterTime + 60*10) < moment.unix()) {
         // vand plante
         latestWaterTime = moment.unix();
+        console.log(`Vander planten automatisk nu (${moment.format('lll')})`)
         usbPort.write('water\n', (err) => {
             if (err) {
                 return console.error(err);
