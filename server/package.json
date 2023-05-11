@@ -9,7 +9,7 @@
   "author": "Nikolaj Jehøj-Krogager",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "formidable": "^1.2.2",
     "moment": "^2.29.2",
     "serialport": "^8.0.7",
